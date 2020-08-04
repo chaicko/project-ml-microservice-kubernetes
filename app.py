@@ -1,8 +1,9 @@
 from flask import Flask, request, jsonify
 from flask.logging import create_logger
 import logging
+import json
 from subprocess import Popen, PIPE
-from os import environ
+from os import environ, path
 
 import pandas as pd
 from sklearn.externals import joblib
@@ -11,36 +12,6 @@ from sklearn.preprocessing import StandardScaler
 app = Flask(__name__)
 LOG = create_logger(app)
 LOG.setLevel(logging.INFO)
-
-
-def source(script, update=True, clean=True):
-    """
-    Source variables from a shell script
-    import them in the environment (if update==True)
-    and report only the script variables (if clean==True)
-    """
-    global environ
-    if clean:
-        environ_back = dict(environ)
-        environ.clear()
-
-    pipe = Popen(". %s; env" % script, stdout=PIPE, shell=True)
-    data = pipe.communicate()[0]
-
-    env = dict(
-        (line.split("=", 1) for line in data.splitlines())
-    )
-
-    if clean:
-        # remove unwanted minimal vars
-        env.pop('LINES', None)
-        env.pop('COLUMNS', None)
-        environ = dict(environ_back)
-
-    if update:
-        environ.update(env)
-
-    return env
 
 def scale(payload):
     """Scales Payload"""
@@ -98,6 +69,16 @@ def predict():
     return jsonify({'prediction': prediction})
 
 if __name__ == "__main__":
+    basedir = path.dirname(path.abspath(__file__))
+    conf = path.join(basedir, 'project.json')
+    LOG.info("Loading env %s" % conf)
+    with open(conf) as fp:
+        env = json.load(fp)
+    LOG.info("config is %s" % json.dumps(env, indent=2))
+    model_file = path.join(basedir, env['MODEL_DATA'])
+    LOG.info(f"Loading model {model_file}")
     # load pretrained model as clf
-    clf = joblib.load("./model_data/boston_housing_prediction.joblib")
-    app.run(host='0.0.0.0', port=80, debug=True) # specify port=80
+    clf = joblib.load(model_file)
+    port = int(env['CONTAINER_PORT'])
+    LOG.info(f"Starting application on port {port}")
+    app.run(host='0.0.0.0', port=port, debug=True)
