@@ -17,7 +17,25 @@ The project runs a Python flask app—in a provided file, `app.py`—that serves
 The following files are part of the project:
 
 ```
-
+$ tree -L 1
+.
+├── Dockerfile: dockerfile to build the container
+├── LICENSE: project license
+├── Makefile: makefile with workflow tasks
+├── README.md: the file you are reading now
+├── app.py: the Flask application with the web app
+├── dev-requirements.txt: python requirements file used for development
+├── make_prediction.sh: utility script that queries the API
+├── model_data: directory with the trained ML model data
+├── output_txt_files: output log files required by the project
+├── project.json: main project configuration
+├── project.conf: shell version of the previous file
+├── requirements.txt: python requirement libs for the production app
+├── run_docker.sh: script that (builds) and runs the application in a docker container
+├── run_kubernetes.sh: script that runs
+├── tests: directory with tests
+├── upload_docker.sh: script to upload image to docker hub
+└── utils.sh: bash utilities used throughout the project
 ```
 
 ## Requirements
