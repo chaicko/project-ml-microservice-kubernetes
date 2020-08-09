@@ -9,7 +9,7 @@ fi
 
 # Step 1:
 # Create dockerpath
-dockerpath="$(docker-user)/${PROJECT}"
+# $dockerpath lives in `utils.sh`
 
 # Step 2:
 # Authenticate & tag

@@ -69,7 +69,14 @@ docker-login () {
     fi
 }
 
+# docker repository path
+dockerpath="$(docker-user)/${PROJECT}"
+
+# Print argument to stderr and exit with error status of 1
 error-exit () {
     echo "${1}" 1>&2
     exit 1
 }
+
+
+
