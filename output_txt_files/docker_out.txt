@@ -1,1 +1,51 @@
-<paste log output from Docker prediction, here>
+[2020-08-09 10:55:22,694] INFO in app: Loading env /app/project.json
+[2020-08-09 10:55:22,695] INFO in app: config is {
+  "PROJECT": "housing-prices",
+  "SERVICE_PORT": 8000,
+  "APP_PORT": 80,
+  "MODEL_DATA": "model_data/boston_housing_prediction.joblib",
+  "CREDENTIALS": "credentials.json"
+}
+[2020-08-09 10:55:22,695] INFO in app: Loading model /app/model_data/boston_housing_prediction.joblib
+[2020-08-09 10:55:22,824] INFO in app: Starting application on port 80
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
+ * Restarting with stat
+[2020-08-09 10:55:23,836] INFO in app: Loading env /app/project.json
+[2020-08-09 10:55:23,837] INFO in app: config is {
+  "PROJECT": "housing-prices",
+  "SERVICE_PORT": 8000,
+  "APP_PORT": 80,
+  "MODEL_DATA": "model_data/boston_housing_prediction.joblib",
+  "CREDENTIALS": "credentials.json"
+}
+[2020-08-09 10:55:23,837] INFO in app: Loading model /app/model_data/boston_housing_prediction.joblib
+[2020-08-09 10:55:23,928] INFO in app: Starting application on port 80
+ * Debugger is active!
+ * Debugger PIN: 316-504-889
+[2020-08-09 10:57:03,157] INFO in app: JSON payload: 
+{'CHAS': {'0': 0}, 'RM': {'0': 6.575}, 'TAX': {'0': 296.0}, 'PTRATIO': {'0': 15.3}, 'B': {'0': 396.9}, 'LSTAT': {'0': 4.98}}
+[2020-08-09 10:57:03,174] INFO in app: Inference payload DataFrame: 
+   CHAS     RM    TAX  PTRATIO      B  LSTAT
+0     0  6.575  296.0     15.3  396.9   4.98
+[2020-08-09 10:57:03,186] INFO in app: Scaling Payload: 
+   CHAS     RM    TAX  PTRATIO      B  LSTAT
+0     0  6.575  296.0     15.3  396.9   4.98
+[2020-08-09 10:57:03,189] INFO in app: Prediction: 
+[20.35373177134412]
+172.17.0.1 - - [09/Aug/2020 10:57:03] "POST /predict HTTP/1.1" 200 -
+[2020-08-09 10:57:32,448] INFO in app: JSON payload: 
+{'CHAS': {'0': 0}, 'RM': {'0': 6.575}, 'TAX': {'0': 296.0}, 'PTRATIO': {'0': 15.3}, 'B': {'0': 396.9}, 'LSTAT': {'0': 4.98}}
+[2020-08-09 10:57:32,461] INFO in app: Inference payload DataFrame: 
+   CHAS     RM    TAX  PTRATIO      B  LSTAT
+0     0  6.575  296.0     15.3  396.9   4.98
+[2020-08-09 10:57:32,472] INFO in app: Scaling Payload: 
+   CHAS     RM    TAX  PTRATIO      B  LSTAT
+0     0  6.575  296.0     15.3  396.9   4.98
+[2020-08-09 10:57:32,476] INFO in app: Prediction: 
+[20.35373177134412]
+172.17.0.1 - - [09/Aug/2020 10:57:32] "POST /predict HTTP/1.1" 200 -

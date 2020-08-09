@@ -1,1 +1,14 @@
-<paste log output from Kubernetes-mediated prediction, here>
+$ ./run_kubernetes.sh
+Creating kubernetes service/pod housing-prices
+service/housing-prices created
+pod/housing-prices created
+NAME             READY   STATUS              RESTARTS   AGE
+housing-prices   0/1     ContainerCreating   0          0s
+Name of the Pod: housing-prices
+Waiting for housing-prices to be Ready
+pod/housing-prices condition met
+Forwarding application port 80 --> 8000
+Forwarding from 127.0.0.1:8000 -> 80
+Forwarding from [::1]:8000 -> 80
+Handling connection for 8000
+
