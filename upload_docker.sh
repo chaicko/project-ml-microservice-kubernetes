@@ -9,13 +9,13 @@ fi
 
 # Step 1:
 # Create dockerpath
-dockerpath="${USER}/${PROJECT}"
+dockerpath="$(docker-user)/${PROJECT}"
 
 # Step 2:
 # Authenticate & tag
 echo "Docker ID and Image: $dockerpath"
 docker-login
-docker tag image-id ${dockerpath}
+docker tag $(image-id) ${dockerpath}
 
 # Step 3:
 # Push image to a docker repository
