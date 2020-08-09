@@ -2,5 +2,6 @@
    "PROJECT" : "housing-prices",
    "HOST_PORT": 8000,
    "CONTAINER_PORT": 80,
-   "MODEL_DATA": "model_data/boston_housing_prediction.joblib"
+   "MODEL_DATA": "model_data/boston_housing_prediction.joblib",
+   "CREDENTIALS": "credentials.json"
 }
