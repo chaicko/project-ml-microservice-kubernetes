@@ -41,7 +41,7 @@ EOF
 )
     curl -d "$JSON" \
          -H "Content-Type: application/json" \
-         -X POST http://localhost:$HOST_PORT/predict
+         -X POST http://localhost:$SERVICE_PORT/predict
 }
 
 # Retrieve the docker username from the credentials file

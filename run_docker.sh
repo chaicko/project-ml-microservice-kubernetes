@@ -11,4 +11,4 @@ docker image ls
 
 # Step 3:
 # Run flask app
-docker run -d -p $HOST_PORT:$CONTAINER_PORT $PROJECT
+docker run -d -p $SERVICE_PORT:$APP_PORT $PROJECT

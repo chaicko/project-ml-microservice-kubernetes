@@ -79,6 +79,6 @@ if __name__ == "__main__":
     LOG.info(f"Loading model {model_file}")
     # load pretrained model as clf
     clf = joblib.load(model_file)
-    port = int(env['CONTAINER_PORT'])
+    port = int(env['APP_PORT'])
     LOG.info(f"Starting application on port {port}")
     app.run(host='0.0.0.0', port=port, debug=True)
