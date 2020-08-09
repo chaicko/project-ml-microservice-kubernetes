@@ -2,8 +2,7 @@ from flask import Flask, request, jsonify
 from flask.logging import create_logger
 import logging
 import json
-from subprocess import Popen, PIPE
-from os import environ, path
+from os import path
 
 import pandas as pd
 from sklearn.externals import joblib
@@ -71,10 +70,10 @@ def predict():
 if __name__ == "__main__":
     basedir = path.dirname(path.abspath(__file__))
     conf = path.join(basedir, 'project.json')
-    LOG.info("Loading env %s" % conf)
+    LOG.info("Loading env %s", conf)
     with open(conf) as fp:
         env = json.load(fp)
-    LOG.info("config is %s" % json.dumps(env, indent=2))
+    LOG.info("config is %s", json.dumps(env, indent=2))
     model_file = path.join(basedir, env['MODEL_DATA'])
     LOG.info(f"Loading model {model_file}")
     # load pretrained model as clf
