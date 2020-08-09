@@ -1,2 +1,12 @@
-.circleci
-.git
+# Ignore all files
+*
+
+# Except the application files
+!app.py
+!model_data
+!project.json
+!requirements.txt
+
+# And the readme/license
+!README.md
+!LICENSE
