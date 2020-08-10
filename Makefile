@@ -17,7 +17,7 @@ else
 	HADOLINT_URL := "https://github.com/hadolint/hadolint/releases/download/v1.18.0/hadolint-Linux-x86_64"
 endif
 
-.PHONY: all install lint test
+.PHONY: all install lint test coveralls
 
 $(VIRTUAL_ENV):
 	@$(PYVER) -m venv $(VIRTUAL_ENV)
@@ -41,5 +41,10 @@ test: app.py $(wildcard tests/*.py)
 lint: Dockerfile app.py
 	$(HADOLINT) Dockerfile
 	$(PYTHON) -m pylint --disable=R,C,W1203 app.py
+
+.coverage: test
+
+coveralls: .coverage
+	COVERALLS_REPO_TOKEN=$(COVERALLS_TOKEN) $(VIRTUAL_ENV)/bin/coveralls
 
 all: lint test
