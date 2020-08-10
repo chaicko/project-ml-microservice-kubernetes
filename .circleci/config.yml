@@ -1,8 +1,10 @@
-# Python CircleCI 2.0 configuration file
+# Python CircleCI 2.1 configuration file
 #
-# Check https://circleci.com/docs/2.0/language-python/ for more details
+# Check https://circleci.com/docs/2.1/language-python/ for more details
 #
-version: 2
+version: 2.1
+orbs:
+    coveralls: coveralls/coveralls@1.0.6
 jobs:
   build:
     docker:
@@ -41,5 +43,8 @@ jobs:
       - run:
           name: run lint
           command: |
-            make lint           
+            make lint
+
+      - coveralls/upload:
+          path_to_lcov: ./.coverage
 
