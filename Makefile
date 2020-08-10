@@ -17,6 +17,8 @@ else
 	HADOLINT_URL := "https://github.com/hadolint/hadolint/releases/download/v1.18.0/hadolint-Linux-x86_64"
 endif
 
+.PHONY: all install lint test
+
 $(VIRTUAL_ENV):
 	@$(PYVER) -m venv $(VIRTUAL_ENV)
 	@echo "activate your virtualenv with:"
@@ -25,6 +27,7 @@ $(VIRTUAL_ENV):
 $(PYTHON): requirements.txt dev-requirements.txt | $(VIRTUAL_ENV)
 	@$(PIP) install --upgrade pip &&\
 	 $(PIP) install -r requirements.txt -r dev-requirements.txt
+	@touch $(PYTHON)
 
 $(HADOLINT): | $(VIRTUAL_ENV)
 	wget -O $(HADOLINT) $(HADOLINT_URL) &&\
@@ -39,4 +42,4 @@ lint: Dockerfile app.py
 	$(HADOLINT) Dockerfile
 	$(PYTHON) -m pylint --disable=R,C,W1203 app.py
 
-all: install lint test
+all: lint test
