@@ -46,37 +46,45 @@ Follow [this guide](https://docs.docker.com/docker-for-mac/install/) to setup th
 
 ## Setup the Environment
 
-* Create a virtualenv with `make venv`. 
-You can select where to install the virtualenv by passing the environment variable `VENV`
-* You can (optionally) activate it as suggested
-* Run `make install` to install the necessary dependencies
+1. Create a virtualenv and install all tools with `make install`.
+You can select where to install the virtualenv by passing the environment variable `VENV`, like `VENV=~/.myvenv make install`. The default directory for the virtualenv is `./.venv`.
+
+Hadolint is also installed in `./.venv/bin/hadolint`.
+
+You can (optionally) activate it as suggested (not needed):
+
+```
+source ./.venv/bin/activate
+```
+
+2. Run `make test` to run some tests
+3. Run `make lint` for linting
 
 ### Running `app.py`
 
-1. Standalone:  `python app.py`
+1. Standalone:  `$VENV/bin/python app.py` (where `$VENV=./.venv` as default)
 2. Run in Docker:  `./run_docker.sh`
 3. Run in Kubernetes:  `./run_kubernetes.sh`
 
-### Kubernetes Steps
+## Project tasks
 
-* Setup and Configure Docker locally.
-* Setup and Configure Kubernetes locally
-* Create Flask app in Container
-* Run via kubectl
+First `source utils.sh` in order to have some functions available throughout the example.
 
-## Running the example
+### Run container
 
-### Task 2: Run container
+To run the application in a docker container, make a prediction and see the logs run:
 
 ```
-run_docker.sh
-make_prediction.sh
+source ./utils.sh
+
+./run_docker.sh
+./make_prediction.sh
 docker logs $(container-id)
 ```
 
-### Task 3: Improve logging and save output
+### Improve logging and save output
 
-Kill your running container:
+First kill the running container with:
 
 ```
 docker container kill $(container-id)
@@ -95,7 +103,7 @@ Make a prediction and collect the logs:
 docker logs $(container-id) > output_txt_files/docker_out.txt 2>&1
 ```
 
-### Task 4: Upload docker image
+### Upload docker image
 
 The docker image is uploaded with the `upload_docker.sh` script to [docker hub](https://hub.docker.com/).
 You can provide the `docker login` credentials by creating a `credentials.json` file with the following contents:
@@ -105,12 +113,12 @@ You can provide the `docker login` credentials by creating a `credentials.json` 
   "docker": {
     "user" : "your-username",
     "password": "your-super-secret-password"
- }
+  }
 }
 ```
 
 The keys of the dictionary need to be as above. If you don't provide a password then the `docker login` will ask for it. Note that this file is **NOT** part of the project, and ignored.
 
-### Task 6: Deploy with Kubernetes and Save Output Logs
+### Deploy with Kubernetes and Save Output Logs
 
-
+If you have Kubernetes properly setup and uploaded to docker hub, then simply run `./run_kubernetes.sh`.
